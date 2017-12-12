@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Advanced Custom Fields: Smart Button\n"
-"POT-Creation-Date: 2017-12-11 17:32+0200\n"
-"PO-Revision-Date: 2017-12-12 09:30+0200\n"
+"POT-Creation-Date: 2017-12-12 10:52+0200\n"
+"PO-Revision-Date: 2017-12-12 10:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -40,17 +40,17 @@ msgstr "Kaikki tietotyypit"
 msgid "Text"
 msgstr "Teksti"
 
-#: acf-smart-button-v5.php:162
-msgid "Link type"
-msgstr "Linkin malli"
+#: acf-smart-button-v5.php:160
+msgid "Use external Link"
+msgstr "Käytä ulkoista linkkiä"
 
-#: acf-smart-button-v5.php:171 acf-smart-button-v5.php:214
-msgid "Internal link"
-msgstr "Sisäinen linkki\t"
-
-#: acf-smart-button-v5.php:176 acf-smart-button-v5.php:191
+#: acf-smart-button-v5.php:180
 msgid "External link"
 msgstr "Ulkoinen linkki"
+
+#: acf-smart-button-v5.php:203
+msgid "Internal link"
+msgstr "Sisäinen linkki\t"
 
 #. Plugin Name of the plugin/theme
 msgid "Advanced Custom Fields: Smart Link"
@@ -74,11 +74,11 @@ msgstr ""
 msgid "http://kollektiv.ag"
 msgstr ""
 
+#~ msgid "Link type"
+#~ msgstr "Linkin malli"
+
 #~ msgid "External Link"
 #~ msgstr "Ulkoinen linkki"
 
 #~ msgid "Internal Link"
 #~ msgstr "Sisäinen linkki"
-
-#~ msgid "Use external Link"
-#~ msgstr "Käytä ulkoista linkkiä"

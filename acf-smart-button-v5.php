@@ -156,43 +156,20 @@ class acf_field_smart_button extends acf_field {
 						 */
 					?>
 
-					<td valign="top" class="acf-field acf-field-radio acf-field-5a2e8d161d578" data-name="test" data-type="radio" data-key="field_5a2e8d161d578">
-
-						<div class="acf-label">
-							<label for="acf-field_5a2e8d161d578"><?php _e( 'Link type', 'acf-smart-button' ); ?></label>
-						</div>
-
-						<div class="acf-input">
-							<input name="acf[field_5a2e8d161d578]" type="hidden">
-
-							<ul id="select-internal-external" class="acf-radio-list acf-bl" data-allow_null="0" data-other_choice="0">
-								<li>
-									<label class="selected">
-										<input type="radio" id="acf-field_5a2e8d161d578" name="acf[field_5a2e8d161d578]" value="internal" checked="checked"><?php echo __( 'Internal link', 'acf-smart-button' ) ?>
-									</label>
-								</li>
-								<li>
-									<label>
-										<input type="radio" id="acf-field_5a2e8d161d578-external" name="acf[field_5a2e8d161d578]" value="external" <?php if($field['value']['use_external']) { echo 'checked'; } ?>><?php echo __( 'External link', 'acf-smart-button' ) ?>
-									</label>
-								</li>
-							</ul>
-						</div>
-					</td>
-<!-- 
 					<td>
-						<label><?php _e('Use external Link', 'acf-smart-button'); ?></label>
+						<div class="acf-label">
+							<label><?php _e('Use external Link', 'acf-smart-button'); ?></label>
+						</div>
 						<div class="switcher">
 							<div class="button-link-switch">
 								<?php
-									$switc = $field['id'] . '[use_external_swichter]';
+									$switcher_id = $field['id'] . '[use_external_switcher]';
 								?>
-							    <input type="checkbox" name="<?php echo $field_name; ?>[use_external]" class="button-link-switch-checkbox" id="<?php echo $switc; ?>" <?php if($field['value']['use_external']) { echo 'checked'; } ?>>
-							    <label class="button-link-switch-label" for="<?php echo $switc; ?>"></label>
+								<input type="checkbox" name="<?php echo $field_name; ?>[use_external]" class="button-link-switch-checkbox" id="<?php echo $switcher_id; ?>" <?php if($field['value']['use_external']) { echo 'checked'; } ?>>
+								<label class="button-link-switch-label" for="<?php echo $switcher_id; ?>"></label>
 							</div>
 						</div>
-					</td> -->
-
+					</td>
 
 					<?php
 						/**
