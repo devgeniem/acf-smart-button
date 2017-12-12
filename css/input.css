@@ -17,6 +17,10 @@
   margin-bottom: 0;
 }
 
+.acf-smart-button-fields {
+    width: 100%;
+}
+
 .acf-smart-button-fields .acf-field-post-object, .acf-smart-button-fields input.external {
 	margin: 0;
 	min-width: 200px;
@@ -61,17 +65,6 @@
     right: 23px;
     border: 1px solid #999999; border-radius: 25px;
     transition: all 0.2s ease 0s;
-}
-.button-link-switch-checkbox:checked + .button-link-switch-label {
-    background-color: #00a0d2;
-}
-
-.button-link-switch-checkbox:checked + .button-link-switch-label, .button-link-switch-checkbox:checked + .button-link-switch-label:before {
-   border-color: #00a0d2;
-}
-
-.button-link-switch-checkbox:checked + .button-link-switch-label:before {
-    right: 0px;
 }
 
 #side-sortables .acf-smart-button-fields td {
