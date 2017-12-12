@@ -252,11 +252,11 @@ class acf_field_smart_button extends acf_field {
 		$dir = plugin_dir_url( __FILE__ );
 
 		// register & include JS
-		wp_register_script( 'acf-smart-button', "{$dir}js/input.js", array(), date( 'h:i:s' ) );
+		wp_register_script( 'acf-smart-button', "{$dir}js/input.js" );
 		wp_enqueue_script( 'acf-smart-button' );
 
 		// register & include CSS
-		wp_register_style( 'acf-smart-button', "{$dir}css/input.css", array(), date( 'h:i:s' ) );
+		wp_register_style( 'acf-smart-button', "{$dir}css/input.css" );
 		wp_enqueue_style( 'acf-smart-button' );
 
 		wp_enqueue_script(array(
