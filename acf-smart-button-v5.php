@@ -1,58 +1,52 @@
 <?php
-
+/**
+ * ACF field smart button
+ */
 class acf_field_smart_button extends acf_field {
 
 
-	/*
-	*  __construct
-	*
-	*  This function will setup the field type data
-	*
-	*  @type	function
-	*  @date	5/03/2014
-	*  @since	5.0.0
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-
+	/**
+	 *  __construct
+	 *
+	 *  This function will setup the field type data
+	 *
+	 *  @type	function
+	 *  @date	5/03/2014
+	 *  @since	5.0.0
+	 *
+	 *  @param	n/a
+	 *  @return	n/a
+	 */
 	function __construct() {
 
-		/*
-		*  name (string) Single word, no spaces. Underscores allowed
-		*/
-
+		/**
+		 *  name (string) Single word, no spaces. Underscores allowed
+		 */
 		$this->name = 'smart_button';
 
+		/**
+		 *  label (string) Multiple words, can include spaces, visible when selecting a field type
+		 */
+		$this->label = __( 'Smart Link' );
 
-		/*
-		*  label (string) Multiple words, can include spaces, visible when selecting a field type
-		*/
-
-		$this->label = __('Smart Button');
-
-
-		/*
-		*  category (string) basic | content | choice | relational | jquery | layout | CUSTOM GROUP NAME
-		*/
-
+		/**
+		 *  category (string) basic | content | choice | relational | jquery | layout | CUSTOM GROUP NAME
+		 */
 		$this->category = 'basic';
 
 
-		/*
-		*  defaults (array) Array of default settings which are merged into the field object. These are used later in settings
-		*/
-
+		/**
+		 *  defaults (array) Array of default settings which are merged into the field object. These are used later in settings
+		 */
 		$this->defaults = array();
 
 
-		/*
-		*  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
-		*  var message = acf._e('FIELD_NAME', 'error');
-		*/
-
+		/**
+		 *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
+		 *  var message = acf._e('FIELD_NAME', 'error');
+		 */
 		$this->l10n = array(
-			'error'	=> __('Error! Please enter a higher value', 'acf-smart-button'),
+			'error'	=> __( 'Error! Please enter a higher value', 'acf-smart-button' ),
 		);
 
 		$this->settings = array(
@@ -79,99 +73,148 @@ class acf_field_smart_button extends acf_field {
 	*  @param	$field (array) the $field being edited
 	*  @return	n/a
 	*/
-
 	function render_field_settings( $field ) {
 
-		/*
-		*  acf_render_field_setting
-		*
-		*  This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-		*  The array of settings does not require a `value` or `prefix`; These settings are found from the $field array.
-		*
-		*  More than one setting can be added by copy/paste the above code.
-		*  Please note that you must also have a matching $defaults value for the field name (font_size)
-		*/
+		/**
+		 *  acf_render_field_setting
+		 *
+		 *  This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
+		 *  The array of settings does not require a `value` or `prefix`; These settings are found from the $field array.
+		 *
+		 *  More than one setting can be added by copy/paste the above code.
+		 *  Please note that you must also have a matching $defaults value for the field name (font_size)
+		 */
 
-		$field = array_merge($this->defaults, $field);
+		$field = array_merge( $this->defaults, $field );
 
-		/* add option to select which post type should be used on the post object. default: all */
+		/**
+		 * Add option to select which post type should be used on the post object. default: all.
+		 */
 		acf_render_field_setting( $field, array(
-			'label'	=> __('Filter by Post Type','acf'),
+			'label'		   => __( 'Filter by Post Type', 'acf' ),
 			'instructions' => '',
-			'type' => 'select',
-			'name' => 'post_type',
-			'choices' => acf_get_pretty_post_types(),
-			'multiple' => 1,
-			'ui' => 1,
-			'allow_null' => 1,
-			'placeholder' => __("All post types",'acf'),
+			'type' 		   => 'select',
+			'name' 		   => 'post_type',
+			'choices'      => acf_get_pretty_post_types(),
+			'multiple'     => 1,
+			'ui' 		   => 1,
+			'allow_null'   => 1,
+			'placeholder'  => __( "All post types" ,'acf' ),
 		));
 
 	}
 
 
 
-	/*
-	*  render_field()
-	*
-	*  Create the HTML interface for your field
-	*
-	*  @param	$field (array) the $field being rendered
-	*
-	*  @type	action
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$field (array) the $field being edited
-	*  @return	n/a
-	*/
-
+	/**
+	 *  render_field()
+	 *
+	 *  Create the HTML interface for your field
+	 *
+	 *  @param	$field (array) the $field being rendered
+	 *
+	 *  @type	action
+	 *  @since	3.6
+	 *  @date	23/01/13
+	 *
+	 *  @param	$field (array) the $field being edited
+	 *  @return	n/a
+	 */
 	function render_field( $field ) {
 
-		$field = array_merge($this->defaults, $field);
+		$field = array_merge( $this->defaults, $field );
 
 		$field_name = esc_attr( $field['name'] );
 
-		/* overwrite fields with empty values to avoid warning */
-		$field['value']['text'] = isset($field['value']['text']) ? $field['value']['text'] : null;
-		$field['value']['link'] = isset($field['value']['link']) ? $field['value']['link'] : null;
-		$field['value']['post_id'] = isset($field['value']['post_id']) ? $field['value']['post_id'] : null;
-		$field['value']['use_external'] = isset($field['value']['use_external']) ? $field['value']['use_external'] : null;
+		// Overwrite fields with empty values to avoid warning.
+		$field['value']['text'] 		= isset( $field['value']['text'] ) ? $field['value']['text'] : null;
+		$field['value']['link'] 		= isset( $field['value']['link'] ) ? $field['value']['link'] : null;
+		$field['value']['post_id'] 		= isset( $field['value']['post_id'] ) ? $field['value']['post_id'] : null;
+		$field['value']['use_external'] = isset( $field['value']['use_external'] ) ? $field['value']['use_external'] : null;
 
 		?>
 
 			<table class="acf-smart-button-fields">
 				<tr>
+
+					<?php
+						/**
+						 * Link text.
+						 */
+					?>
 					<td valign="top">
-						<label><?php _e('text', 'acf-smart-button'); ?></label>
+						<div class="acf-label">
+							<label><?php _e( 'Text', 'acf-smart-button' ); ?></label>
+						</div>
+
 						<input type="text" value="<?php echo esc_attr( $field['value']['text'] ); ?>" name="<?php echo $field_name; ?>[text]" class="text" />
 					</td>
+
+					<?php
+						/**
+						 * External or internal link switch.
+						 */
+					?>
+
+					<td>
+						<div class="acf-label">
+							<label><?php _e('Use external Link', 'acf-smart-button'); ?></label>
+						</div>
+						<div class="switcher">
+							<div class="button-link-switch">
+								<?php
+									$switcher_id = $field['id'] . '[use_external_switcher]';
+								?>
+								<input type="checkbox" name="<?php echo $field_name; ?>[use_external]" class="button-link-switch-checkbox" id="<?php echo $switcher_id; ?>" <?php if($field['value']['use_external']) { echo 'checked'; } ?>>
+								<label class="button-link-switch-label" for="<?php echo $switcher_id; ?>"></label>
+							</div>
+						</div>
+					</td>
+
+					<?php
+						/**
+						 * External link
+						 */
+					?>
 					<td valign="top" class="external hidden">
-						<label><?php _e('External Link', 'acf-smart-button'); ?></label>
+
+						<div class="acf-label">
+							<label><?php _e( 'External link', 'acf-smart-button' ); ?></label>
+						</div>
+
 						<?php
 
-							do_action('acf/render_field/type=url', array(
-								'type' => 'text',
-								'name' => $field_name . '[link]',
-								'value' => $field['value']['link'],
-								'id' => $field_name.'_external',
-								'class' => 'external',
+							do_action( 'acf/render_field/type=url', array(
+								'type' 	      => 'text',
+								'name'        => $field_name . '[link]',
+								'value' 	  => $field['value']['link'],
+								'id' 		  => $field_name . '_external',
+								'class' 	  => 'external',
 								'placeholder' => ''
 							));
 						?>
 					</td>
+
+					<?php
+						/**
+						 * Internal link
+						 */
+					?>
 					<td valign="top" class="internal">
-						<label><?php _e('Internal Link', 'acf-smart-button'); ?></label>
+						<div class="acf-label">
+							<label><?php _e( 'Internal link', 'acf-smart-button' ); ?></label>
+						</div>
+
 						<?php
 							// str replace to get raw key (there seems to be no other way?)
-							$field_raw_key = str_replace('field_', '', $field['key']);
+							$field_raw_key = str_replace( 'field_', '', $field['key'] );
 						?>
 						<div class="acf-field acf-field-<?php echo $field_raw_key; ?> acf-field-post-object" data-name="<?php echo $field['_name']; ?>[post_id]" data-type="post_object" data-key="<?php echo $field['key']; ?>">
 							<div class="acf-input">
 							<?php
 								// $types = array('post', 'page');
 
-								@do_action('acf/render_field/type=post_object', array(
+								@do_action( 'acf/render_field/type=post_object', array(
 									'name' => $field_name . '[post_id]',
 									'value' => $field['value']['post_id'],
 									// 'post_type' => $types, // Removed so the selection isn't restricted to just posts and pages
@@ -183,18 +226,6 @@ class acf_field_smart_button extends acf_field {
 							</div>
 						</div>
 					</td>
-					<td>
-						<label><?php _e('Use external Link', 'acf-smart-button'); ?></label>
-						<div class="switcher">
-							<div class="button-link-switch">
-								<?php
-									$swticher_id = $field['id'] . '[use_external_swichter]';
-								?>
-							    <input type="checkbox" name="<?php echo $field_name; ?>[use_external]" class="button-link-switch-checkbox" id="<?php echo $swticher_id; ?>" <?php if($field['value']['use_external']) { echo 'checked'; } ?>>
-							    <label class="button-link-switch-label" for="<?php echo $swticher_id; ?>"></label>
-							</div>
-						</div>
-					</td>
 				</tr>
 			</table>
 
@@ -203,32 +234,30 @@ class acf_field_smart_button extends acf_field {
 	}
 
 
-	/*
-	*  input_admin_enqueue_scripts()
-	*
-	*  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
-	*  Use this action to add CSS + JavaScript to assist your render_field() action.
-	*
-	*  @type	action (admin_enqueue_scripts)
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-
+	/**
+	 *  input_admin_enqueue_scripts()
+	 *
+	 *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
+	 *  Use this action to add CSS + JavaScript to assist your render_field() action.
+	 *
+	 *  @type	action (admin_enqueue_scripts)
+	 *  @since	3.6
+	 *  @date	23/01/13
+	 *
+	 *  @param	n/a
+	 *  @return	n/a
+	 */
 	function input_admin_enqueue_scripts() {
 
 		$dir = plugin_dir_url( __FILE__ );
 
 		// register & include JS
 		wp_register_script( 'acf-smart-button', "{$dir}js/input.js" );
-		wp_enqueue_script('acf-smart-button');
-
+		wp_enqueue_script( 'acf-smart-button' );
 
 		// register & include CSS
 		wp_register_style( 'acf-smart-button', "{$dir}css/input.css" );
-		wp_enqueue_style('acf-smart-button');
+		wp_enqueue_style( 'acf-smart-button' );
 
 		wp_enqueue_script(array(
 			'acf-smart-button',
@@ -427,20 +456,18 @@ class acf_field_smart_button extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-
-
 	function format_value( $value, $post_id, $field ) {
 
 		// directly return false if there is no button text. A button is only valid if there is a valid text and url
-		if( empty($value['text']) ) {
+		if( empty( $value['text'] ) ) {
 			return false;
 		}
 
 		// return url always as same data field, overwrite use_external with true or false for further processing
 		// Returns target="_blank" html as separate field to make the view even leaner
-		if(!array_key_exists('use_external', $value)) {
+		if( ! array_key_exists( 'use_external', $value ) ) {
 			// internal
-			if( empty($value['post_id']) ) { // return false if there is no post_id
+			if( empty( $value['post_id'] ) ) { // return false if there is no post_id
 				return false;
 			}else { // add the values
 				$value['url'] = get_permalink($value['post_id']);
@@ -448,7 +475,7 @@ class acf_field_smart_button extends acf_field {
 			}
 		} else {
 			// external
-			if( empty($value['link']) ) { // return false if there is no link
+			if( empty( $value['link'] ) ) { // return false if there is no link
 				return false;
 			}else { // add the values
 				$value['url'] = $value['link'];
@@ -457,9 +484,9 @@ class acf_field_smart_button extends acf_field {
 		}
 
 		// unsed fields that are not needed (or do you?)
-		unset($value['link']);
-		unset($value['post_id']);
-		unset($value['use_external']);
+		unset( $value['link'] );
+		unset( $value['post_id'] );
+		unset( $value['use_external'] );
 
 		return $value;
 	}
@@ -571,9 +598,7 @@ class acf_field_smart_button extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$field
 	*/
-
 	/*
-
 	function update_field( $field ) {
 
 		return $field;
@@ -599,7 +624,6 @@ class acf_field_smart_button extends acf_field {
 	/*
 
 	function delete_field( $field ) {
-
 
 
 	}
